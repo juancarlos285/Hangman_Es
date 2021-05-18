@@ -1,6 +1,7 @@
 from diccionario import diccionario
 import random
 from quitar_tildes import quitar_tildes
+import string
 
 palabra = random.choice(diccionario)
 palabra_sin_tildes = quitar_tildes(palabra)
@@ -19,6 +20,10 @@ while respuesta != set(palabra_sin_tildes) and vidas > 0:
             palabra_escondida += "_"
         print(palabra_escondida, end=" ")
     letra_usuario = input('\nIngresa una letra: ')
+    while len(letra_usuario) > 1:
+        letra_usuario = input('\nUna sola letra, por favor: ')
+    while letra_usuario not in string.ascii_lowercase:
+        letra_usuario = input('\nNo es una letra: ')
     letras_usadas.add(letra_usuario)
     print('Has usado estas letras: ', ', '.join(sorted(letras_usadas)), '\n')
     if letra_usuario in palabra_sin_tildes:
